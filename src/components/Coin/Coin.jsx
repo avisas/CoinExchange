@@ -15,7 +15,7 @@ export default class Coin extends Component {
 }
 
 Coin.propTypes = {
-  name: propTypes.string,
-  ticker: propTypes.string,
-  price: propTypes.number
+  name: PropTypes.string.isRequired,
+  ticker: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired
 }
