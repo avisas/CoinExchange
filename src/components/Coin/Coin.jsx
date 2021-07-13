@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Coin.css';
+import PropTypes from 'prop-types';
 
 export default class Coin extends Component {
     render() {
@@ -7,9 +8,14 @@ export default class Coin extends Component {
             <tr className='coin-row'>
               <td>{this.props.name}</td>
               <td>{this.props.ticker}</td> 
-              <td>{this.props.price}</td>  
+              <td>${this.props.price}</td>  
             </tr>
           );
     }
 }
 
+Coin.propTypes = {
+  name: propTypes.string,
+  ticker: propTypes.string,
+  price: propTypes.number
+}

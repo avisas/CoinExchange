@@ -21,12 +21,15 @@ function App() {
         </tr>
       </thead>
       <tbody>
-        <Coin name="Bitcoin" ticker = "BTC" price ="$9999.99"/>
-        <Coin name="Ethereum" ticker = "ETH" price ="$299.99"/>
+        <Coin name="Bitcoin" ticker = "BTC" price ={9999.99}/>
+        <Coin name="Ethereum" ticker = "ETH" price ={299.99}/>
       </tbody>
     </table>
   </div>
   );
 }
+
+// to represent a number, fractional number -> put in brackets.
+
 
 export default App;
