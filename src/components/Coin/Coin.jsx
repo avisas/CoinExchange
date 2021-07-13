@@ -8,10 +8,11 @@ export default class Coin extends Component {
       this.state = {
         price: this.props.price
       }
+      this.handleClick = this.handleClick.bind(this);
   }
 
   // catch state when component mount to DOM
-  componentDidMount() {
+  /*componentDidMount() {
     const callback = () => {
       const randomPercentage = 0.995 + Math.random() * 0.01;
       this.setState( function(oldState) {
@@ -22,12 +23,27 @@ export default class Coin extends Component {
     }
     setInterval( callback, 1000);
   }
+  */
+  handleClick(event) {
+    event.preventDefault();
+    const randomPercentage = 0.995 + Math.random() * 0.01;
+      this.setState( function(oldState) {
+        return {
+          price: oldState.price * randomPercentage
+        };
+      });
+  }
     render() {
         return (
             <tr className='coin-row'>
               <td>{this.props.name}</td>
               <td>{this.props.ticker}</td> 
-              <td>${this.state.price}</td>  
+              <td>${this.state.price}</td>
+              <td>
+                <form action="#" method="POST">
+                  <button onClick={this.handleClick}>Refresh</button>
+                </form>
+              </td>  
             </tr>
           );
     }
