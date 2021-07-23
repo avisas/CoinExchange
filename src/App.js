@@ -43,19 +43,35 @@ class App extends React.Component {
         }
       ]
     }
+    this.handleRefresh = this.handleRefresh.bind(this);
+  }
+  handleRefresh(valueChangeTicker) {
+    const newCoinData = this.state.coinData.map(function({ticker, name, price}) {
+      let newPrice = price;
+      if(valueChangeTicker === ticker) {
+        const randomPercentage = 0.995 + Math.random() * 0.01;
+        newPrice = newPrice * randomPercentage;
+      }
+      return {
+        ticker,
+        name,
+        price: newPrice
+      }
+    });
+    this.setState({coinData: newCoinData});
   }
   render() {
     return (
-      <Div className="App">
-        <AppHeader/>
+      <Div>
+        <AppHeader />
         <AccountBalance amount={this.state.balance} />
-        <CoinList coinData={this.state.coinData} />
+        <CoinList coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
       </Div>
     );
   }
 }
 
-  // to represent a number, fractional number -> put in brackets.
+// to represent a number, fractional number -> put in brackets.
 
 
 export default App;
