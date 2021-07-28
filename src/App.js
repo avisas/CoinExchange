@@ -15,6 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       balance: 10000,
+      showBalance: true,
       coinData: [
         {
           name: 'Bitcoin',
@@ -34,7 +35,7 @@ class App extends React.Component {
           balance: 0,
           price: 1.0
         },
-        {
+        { 
           name: 'Ripple',
           ticker: 'XRP',
           balance: 1000,
@@ -49,7 +50,18 @@ class App extends React.Component {
       ]
     }
     this.handleRefresh = this.handleRefresh.bind(this);
+    this.handleBalanceVisibilityChange = this.handleBalanceVisibilityChange.bind(this);
   }
+
+  handleBalanceVisibilityChange() {
+    this.setState( function(oldState) {
+      return {
+        ...oldState,
+        showBalance: !oldState.showBalance
+      }
+    });
+  }
+
   handleRefresh(valueChangeTicker) {
     const newCoinData = this.state.coinData.map(function({ticker, name, price}) {
       let newPrice = price;
@@ -69,8 +81,14 @@ class App extends React.Component {
     return (
       <Div>
         <AppHeader />
-        <AccountBalance amount={this.state.balance} showBalance={true}/>
-        <CoinList coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
+        <AccountBalance 
+          amount={this.state.balance} 
+          showBalance={this.state.showBalance} 
+          handleBalanceVisibilityChange={this.handleBalanceVisibilityChange}/>
+        <CoinList 
+          coinData={this.state.coinData} 
+          showBalance={this.state.showBalance}
+          handleRefresh={this.handleRefresh}/>
       </Div>
     );
   }
