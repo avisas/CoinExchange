@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CoinList from './components/CoinList/CoinList';
 import AccountBalance from './components/AccountBalance/AccountBalance';
 import AppHeader from './components/AppHeader/AppHeader';
@@ -38,6 +38,12 @@ function App(props) {
     // Retrieve the prices
     setCoinData(coinPriceData);
   };
+
+  useEffect(function() {
+    if(coinData.length === 0) {
+      componentDidMount();
+    }
+  });
 
   const handleBalanceVisibilityChange = () => {
     setShowBalance(oldValue => !oldValue);
