@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Td = styled.td`
-  border: 1px solid #cccccc;
+  border: 1px solid #2f2e2f;
   width: 25vh;
 `;
 
