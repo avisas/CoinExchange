@@ -4,45 +4,57 @@ import styled from 'styled-components';
 
 const Section = styled.section`
     font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 3rem;
+    display: inline-block;
+`;
+
+const Balance = styled.div`
+    min-width: 250px;
+    margin: 0.5rem 0 0 2.5rem;
+    font-size: 1.5rem;
+    vertical-align: middle;
     text-align: left;
-    padding: 1.5rem 5rem;
 `;
 
 const Button = styled.button`
-    background-image: linear-gradient(to right, #7474BF 0%, #348AC7 51%, #7474BF 100%);
-    margin: 10px;
-    padding: 5px 25px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;            
-    border-radius: 10px;
-    display: block;
-    &:hover {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-        margin: 8px 10px 12px;
-        background-position: right center;
-    }
+    margin: 0 8px;
+`; 
+
+const BalanceToggleButton = styled(Button)`
+    width: 150px;
 `;
+
+var formatter = Intl.NumberFormat('en-Us', {
+    style: 'currency',
+    currency: 'USD'
+});
 
 export default function AccountBalance(props) {
 
     const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance';
     let content = null;
+    const buttonClass = 'btn ' + (props.showBalance ? 'btn-warning' : 'btn-info');
     if (props.showBalance) {
-        content = <>Balance: ${props.amount}</>;
+        content = <>{formatter.format(props.amount)}</>;
     }
     return (
+        <>
+        <Balance>{content}</Balance>
         <Section>
-            {content}
-            <br></br>
-            <Button onClick={props.handleBalanceVisibilityChange}>{buttonText}</Button>
+            <BalanceToggleButton onClick={props.handleBalanceVisibilityChange}
+                    className={buttonClass}>
+                    {buttonText}
+            </BalanceToggleButton>
+            <Button className="btn btn-success">
+                <i className="fas fa-helicopter"></i>
+            </Button>
         </Section>
+        </>
     );
 }
 
 AccountBalance.propTypes = {
     amount: PropTypes.number.isRequired
-}
- 
+};
