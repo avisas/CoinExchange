@@ -56,6 +56,19 @@ function App(props) {
     setShowBalance(oldValue => !oldValue);
   };
 
+  const handleTransaction = (isBuy, valueChangeId) => {
+    var balanceChange = isBuy ? 1 : -1;
+    const newCoinData = coinData.map(function(values) {
+      let newValues = {...values};
+      if(valueChangeId === values.key) {
+        newValues.balance += balanceChange;
+        setBalance ( oldBalance => oldBalance - balanceChange * newValues.price);
+      }
+      return newValues;
+    });
+    setCoinData(newCoinData);
+  };
+
   const handleRefresh = async (valueChangeId) => {
     const tickerUrl = `https://api.coinpaprika.com/v1/tickers/${valueChangeId}`;
     const response = await axios.get(tickerUrl);
@@ -80,6 +93,7 @@ function App(props) {
         <CoinList
           coinData={coinData}
           showBalance={showBalance}
+          handleTransaction={handleTransaction}
           handleRefresh={handleRefresh} />
       </Div>
     );
