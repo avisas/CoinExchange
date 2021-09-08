@@ -48,6 +48,10 @@ function App(props) {
     }
   });
 
+  const handleBrrr = () => {
+    setBalance(oldBalance => oldBalance + 1200);
+  };
+
   const handleBalanceVisibilityChange = () => {
     setShowBalance(oldValue => !oldValue);
   };
@@ -71,6 +75,7 @@ function App(props) {
         <AccountBalance
           amount={balance}
           showBalance={showBalance}
+          handleBrrr={handleBrrr}
           handleBalanceVisibilityChange={handleBalanceVisibilityChange} />
         <CoinList
           coinData={coinData}

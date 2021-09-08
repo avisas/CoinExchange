@@ -34,11 +34,11 @@ var formatter = Intl.NumberFormat('en-Us', {
 export default function AccountBalance(props) {
 
     const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance';
-    let content = null;
-    const buttonClass = 'btn ' + (props.showBalance ? 'btn-warning' : 'btn-info');
+    let content = '\u00A0';  // unicode - edit a placeholder. page doesn't up and down. 
     if (props.showBalance) {
         content = <>{formatter.format(props.amount)}</>;
     }
+    const buttonClass = 'btn ' + (props.showBalance ? 'btn-warning' : 'btn-info');
     return (
         <>
         <Balance>{content}</Balance>
@@ -47,7 +47,8 @@ export default function AccountBalance(props) {
                     className={buttonClass}>
                     {buttonText}
             </BalanceToggleButton>
-            <Button className="btn btn-success">
+            <Button className="btn btn-success"
+                onClick={props.handleBrrr}>
                 <i className="fas fa-helicopter"></i>
             </Button>
         </Section>
